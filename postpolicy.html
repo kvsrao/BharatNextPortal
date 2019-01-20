@@ -1,0 +1,162 @@
+<!Doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <!--<meta http-equiv="Content-Type" content="text/html">-->
+        <title>BharatNext</title>
+        <!--<meta name="author" content="Jake Rocheleau">-->
+        <!--        <link rel="shortcut icon" href="http://static.tmimgcdn.com/img/favicon.ico">
+                <link rel="icon" href="http://static.tmimgcdn.com/img/favicon.ico">-->
+        <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+        <!--<link rel="stylesheet" type="text/css" media="all" href="css/switchery.min.css">-->
+        <link rel="stylesheet" type="text/css" media="all" href="bootstrap-4.0.0/dist/css/bootstrap.min.css">
+        <!--<script type="text/javascript" src="js/switchery.min.js"></script>-->
+        <script type="text/javascript" src="js/jquery.3.3.1.min.js"></script>
+        <script type="text/javascript" src="bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <div id="wrapper">
+
+            <h1>Policy Posting</h1>
+
+            <form onsubmit="return false" name="postjob" id="postjob">
+                <div class="col-3">
+                    <label>
+                        Policy Name
+                        <input type="text" placeholder="Enter Policy Name" id="name" name="name" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Policy From
+                        <input type="text" placeholder="Enter Policy From Details" id="pfrom" name="pfrom" tabindex="2">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Policy Category
+                        <input type="text" placeholder="Enter Policy Category" id="category" name="category" tabindex="2">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Age
+                        <input type="number" maxlength="3" placeholder="Enter Age" id="age" name="age" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Gender
+                        <input type="text" placeholder="Enter Gender" id="gender" name="gender" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Caste
+                        <input type="text" placeholder="Enter Caste" id="cast" name="cast" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        State
+                        <input type="text" placeholder="Enter State" id="state" name="state" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        District
+                        <input type="text" placeholder="Enter District" id="district" name="district" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Sub_District
+                        <input type="text" placeholder="Enter Sub District for job" id="sub_district" name="sub_district" tabindex="1">
+                    </label>
+                </div>
+                <div class="col-3">
+                    <label>
+                        Ward
+                        <input type="text" placeholder="Enter Ward" id="ward" name="ward" tabindex="1">
+                    </label>
+                </div>              
+                <div class="col-3">
+                    <label>
+                        Whom
+                        <input type="text" placeholder="Policy Whome" id="whom" name="whom" tabindex="1">
+                    </label>
+                </div>              
+
+
+                <div class="col-md-12" onclick="myFunction();">                   
+                    <label>
+                        Policy Details
+                    </label>
+                </div>   
+
+                <div class="col-md-12" id="detailsarea">               
+                  
+                    <textarea  placeholder="Enter Policy Details Here" name="details" class="lg-textarea form-control " rows="5" style="width:100%;"></textarea>
+                </div>
+
+                <div class="col-submit">
+                    <button class="submitbtn  text-plain " style="font-size: 20px; height: 50px;">Post Policy</button>
+                </div>
+
+            </form>
+        </div>
+        <!--        <script type="text/javascript">
+                    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        
+                    elems.forEach(function (html) {
+                        var switchery = new Switchery(html);
+                    });
+                </script>-->
+
+        <script>
+            $("form#postjob").submit(function (event) {
+                let data = $("form#postjob").serialize();
+                console.log(data);
+                alert('ok');
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/BharatNext/postpolicy.php",
+                    data: data,
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function () {
+                        alert("Handler for .submit() called.");
+                    },
+                    dataType: 'html/text',
+                });
+                event.preventDefault();
+            });
+
+            var x = document.querySelector("#detailsarea");
+            x.style.display = "none";
+            function myFunction() {
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+
+
+//            $(document).ready(function () {
+//
+//                //this will attach the class to every target 
+//                $(document).on('click', function (event) {
+//                    $target = $(event.target);
+//                    $("*").removeClass("clickbackground");
+//                    $target.addClass('clickbackground');
+//                });
+//
+//            })
+        </script>
+
+
+    </body>
+</html>

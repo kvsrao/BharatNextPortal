@@ -1,0 +1,103 @@
+<!Doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>BharatNext</title>
+        <!--<link rel="stylesheet" type="text/css" media="all" href="css/styles.css">-->
+        <!--<link rel="stylesheet" type="text/css" media="all" href="css/switchery.min.css">-->
+        <link rel="stylesheet" type="text/css" media="all" href="DataTables-1.10.18/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" media="all" href="bootstrap-4.0.0/dist/css/bootstrap.min.css">
+        <!--<script type="text/javascript" src="js/switchery.min.js"></script>-->
+        <script type="text/javascript" src="js/jquery.3.3.1.min.js"></script>
+        <script type="text/javascript" src="bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="DataTables-1.10.18/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+        <style>
+
+        </style>
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div  class="container">
+
+            <h1>Job Listing</h1>
+
+            <form>
+
+                <div class="table-responsive">
+                    <table  id="example" class="display table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th >SLNO</th>
+                                <th>Department</th>
+                                <th >Job Title</th>
+                                <th >Vacancies</th>
+                                <th >Declaration</th>
+                                <th >Qualification</th>
+                                <th >How To Apply</th>
+                                <th >Options</th>
+                            </tr>
+                        </thead>
+                        <tbody id="internalbody"> 
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+
+                <div class="col-submit">
+                    <button class="submitbtn  text-plain " style="font-size: 20px; height: 50px;">Post Job</button>
+                </div>
+
+            </form>
+        </div>
+
+
+        <script>
+//            $("form#postjob").submit(function (event) {
+//            let data = $("form#postjob").serialize();
+//            console.log(data);
+//            alert('ok');
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/BharatNext/listjobs.php",
+                data: "",
+                success: function (data) {
+//                    alert(data);
+                    var det = data["data"]["notifications"];
+                    let html = "";
+//                alert(det.length);
+                    for (i = 0; i < det.length; i++) {
+                        if (det[i] != null) {
+                            html += `<tr><th scope="row">${det[i]["jobid"]}</th><td>${det[i]["department"]}</td><td>${det[i]["department"]}</td><td>${det[i]["department"]}</td><td>${det[i]["department"]}</td><td>${det[i]["department"]}</td><td>${det[i]["department"]}</td><td><button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>Trash</button><a href="#" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                            </a></td></tr>`;
+                        }
+                    }
+                    $("#internalbody").html(html);
+//                alert(det);
+                },
+                error: function () {
+                    alert("Handler for .submit() called.");
+                },
+                dataType: 'json',
+            });
+//            event.preventDefault();
+//            });
+
+
+        </script>
+
+
+    </body>
+</html>
